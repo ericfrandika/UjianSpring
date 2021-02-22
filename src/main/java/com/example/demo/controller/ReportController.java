@@ -126,10 +126,12 @@ public class ReportController {
             logger.error("idPasien not Avaliable");
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id " + report.getIdPasien() + " already not Found."), HttpStatus.NOT_FOUND);
         }
-        if (pasien.isStatus() != true) {
+         if (pasien.isStatus() != true) {
             logger.error("idPasien not Avaliable");
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id " + report.getIdPasien() + " already not Avaliable."), HttpStatus.CONFLICT);
-        } else {
+        }
+
+        else {
             logger.info("Creating Report : {}", report);
             reportService.saveReport(report);
             return new ResponseEntity<>(report, HttpStatus.CREATED);

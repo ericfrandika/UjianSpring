@@ -1,0 +1,1284 @@
+{
+	"info": {
+		"_postman_id": "dd019f49-64aa-4b2d-9e13-ff79a9553649",
+		"name": "Klinik",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Dokter",
+			"item": [
+				{
+					"name": "Find All Dokter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Dokter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"namaDokter\":\"Budi\",\r\n    \"tglPraktek\":\"2021-05-25\",\r\n    \"gender\":\"laki-laki\",\r\n    \"noTelp\":\"084736453728\",\r\n    \"alamat\":\"Malang\",\r\n    \"status\":true\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/6c372131-f8d8-4a8b-97a9-758977dcd865",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"6c372131-f8d8-4a8b-97a9-758977dcd865"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/name/Eric",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"name",
+								"Eric"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n    \"namaDokter\": \"Rika\",\r\n    \"tglPraktek\": \"2021-02-22\",\r\n    \"gender\": \"laki-laki\",\r\n    \"noTelp\": \"081278829165\",\r\n    \"alamat\": \"serpong\",\r\n    \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/e169756f-6dcb-4fb7-be08-85c80beb152f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"e169756f-6dcb-4fb7-be08-85c80beb152f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\"status\": true}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/status/e169756f-6dcb-4fb7-be08-85c80beb152f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"status",
+								"e169756f-6dcb-4fb7-be08-85c80beb152f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/e169756f-6dcb-4fb7-be08-85c80beb152f",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"e169756f-6dcb-4fb7-be08-85c80beb152f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindALLTrue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/true/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"true",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findallpaging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/dokter/paging/?page=&limit=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"dokter",
+								"paging",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obat",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n    \"namaObat\": \"Sanmol\",\r\n    \"qty\": 10,\r\n    \"harga\": 10000,\r\n    \"totalHarga\": 0,\r\n    \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findalltrue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/true/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"true",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Obat",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \r\n    \"namaObat\": \"Paracetamol\",\r\n    \"qty\": 1000,\r\n    \"harga\": 100\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/12613659-5d47-467b-95b3-ccd9a95c6812",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"12613659-5d47-467b-95b3-ccd9a95c6812"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"namaObat\": \"Sanmol\",\r\n        \"qty\": 10,\r\n        \"harga\": 10000,\r\n        \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\"idObat\": \"12613659-5d47-467b-95b3-ccd9a95c6812\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/12613659-5d47-467b-95b3-ccd9a95c6812",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"12613659-5d47-467b-95b3-ccd9a95c6812"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/name/Sanmol",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"name",
+								"Sanmol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindALLstatusTrue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/true/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"true",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":false\r\n   \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/status/f2dfd451-97c6-434c-8590-5ad9ada82943",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"status",
+								"f2dfd451-97c6-434c-8590-5ad9ada82943"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete byid",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/12613659-5d47-467b-95b3-ccd9a95c6812",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"12613659-5d47-467b-95b3-ccd9a95c6812"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/obat/paging/?page=0&limit=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"obat",
+								"paging",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pasien",
+			"item": [
+				{
+					"name": "Find By id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/123",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pasien",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"namaPasien\": \"Bro\",\r\n        \"tempat\": \"BSD\",\r\n        \"tglLahir\": \"1984-04-22\",\r\n        \"gender\": \"Laki-Laki\",\r\n        \"noTelp\": \"08321234232\",\r\n        \"alamat\": \"Tangerang\",\r\n        \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Pasien",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/status/123",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								"status",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"namaPasien\": \"1123\",\r\n    \"tempat\": \"29\",\r\n    \"tglLahir\": \"2021-02-02\",\r\n    \"gender\": \"23\",\r\n    \"noTelp\": \"111\",\r\n    \"alamat\": \"1\",\r\n    \"status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/111",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								"111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/ttt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								"ttt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteALL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllstatusTrue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/true/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								"true",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/pasien/paging/?page=2&limit=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"pasien",
+								"paging",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tindakan",
+			"item": [
+				{
+					"name": "Create Tindakan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"namaTindakan\":\"pasang behel1\",\r\n    \"biayaTindakan\":4550000,\r\n    \"status\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/name/cabut gigi",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								"name",
+								"cabut gigi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"idTindakan\": \"404072d0-6c49-40e8-8dc3-e6f71e788ebe\",\r\n        \"namaTindakan\": \"Cabut Gigi\",\r\n        \"biayaTindakan\": 500000,\r\n        \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/status/3976f39e-c7a7-43f8-b3b5-49168d341039",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								"status",
+								"3976f39e-c7a7-43f8-b3b5-49168d341039"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/true/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								"true",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTindakan",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"namaTindakan\": \"pasang behel\",\r\n    \"biayaTindakan\": 455000,\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/a904e87b-9f69-4876-95d4-aad13709cd5b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								"a904e87b-9f69-4876-95d4-aad13709cd5b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "FindByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/a904e87b-9f69-4876-95d4-aad13709cd5b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								"a904e87b-9f69-4876-95d4-aad13709cd5b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllpaging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/tindakan/paging/?page=1&limit=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"tindakan",
+								"paging",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/41d0c33e-be64-4b93-b246-edc54a38d3ce",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								"41d0c33e-be64-4b93-b246-edc54a38d3ce"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"idPasien\":\"3d7f1edf-0da4-40b1-8d92-1117e52e671d\",\r\n\"idDokter\":\"6c372131-f8d8-4a8b-97a9-758977dcd865\",\r\n\"tglTransaction\":\"2021-02-22\",\r\n\"status\":true,\r\n\"biayaObatList\":[\r\n    {\r\n        \"idObat\":\"12613659-5d47-467b-95b3-ccd9a95c6812\",\r\n        \"qty\":30\r\n    },\r\n      {\r\n        \"idObat\":\"f38a564e-0022-4ea4-ab74-c90e4fe556c0\",\r\n        \"qty\":9\r\n    }\r\n],\r\n\"tindakanList\":[{\r\n        \"idTindakan\":\"a904e87b-9f69-4876-95d4-aad13709cd5b\"\r\n},\r\n{\r\n        \"idTindakan\":\"cb1741f7-52a5-4c26-b1ef-88eb3118bff0\"\r\n}\r\n\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findalltrue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/true/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								"true",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutUpdateList",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"idTransaction\":\"f4cf87b2-35ff-4bca-b7ec-f707a4c926c4\",\r\n\"idPasien\":\"3d7f1edf-0da4-40b1-8d92-1117e52e671d\",\r\n\"idDokter\":\"6c372131-f8d8-4a8b-97a9-758977dcd865\",\r\n\"tglTransaction\":\"2021-02-22\",\r\n\"status\":true,\r\n\"biayaObatList\":[\r\n    {\r\n        \"idObat\":\"12613659-5d47-467b-95b3-ccd9a95c6812\",\r\n        \"qty\":30\r\n    }\r\n],\r\n\"tindakanList\":[{\r\n        \"idTindakan\":\"a904e87b-9f69-4876-95d4-aad13709cd5b\"\r\n}\r\n\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/f4cf87b2-35ff-4bca-b7ec-f707a4c926c4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								"f4cf87b2-35ff-4bca-b7ec-f707a4c926c4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\" : true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/status/93d37ebe-bace-4f0b-8dfe-9c3fc954bffe",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								"status",
+								"93d37ebe-bace-4f0b-8dfe-9c3fc954bffe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All data",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllwithPaging",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/paging/?page=1&limit=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								"paging",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByid",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/klinik/master/report/8a7603c1-92f4-4c34-ae8e-d79211f156aa",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"klinik",
+								"master",
+								"report",
+								"8a7603c1-92f4-4c34-ae8e-d79211f156aa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
