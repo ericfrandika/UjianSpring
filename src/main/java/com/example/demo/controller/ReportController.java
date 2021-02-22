@@ -36,7 +36,7 @@ public class ReportController {
     @Autowired
     TindakanService tindakanService;
 
-    //    --------------------------------------------FIND ALL REPORT-----------------------------
+    //    ---(1)-----------------------------------------FIND ALL REPORT-----------------------------
     @RequestMapping(value = "/report/", method = RequestMethod.GET)
     public ResponseEntity<List<Report>> listAllReport() {
         List<Report> reportList = reportService.findAllReport();
@@ -48,7 +48,7 @@ public class ReportController {
     }
 
 
-    // --------------------------------------------------Create a Report WITH VALIDATION----------------------------------------------
+    // ------(2)------------------------------------------Create a Report WITH VALIDATION----------------------------------------------
 
     @RequestMapping(value = "/report/", method = RequestMethod.POST)
     public ResponseEntity<?> createReport(@RequestBody Report report) throws Exception {
@@ -181,7 +181,7 @@ public class ReportController {
         }
 
     }
-    //-----------------------------------UPDATE REPORT ----------------------------------------------------
+    //--------(6)-------------------------UPDATE REPORT ----------------------------------------------------
 
     @RequestMapping(value = "/report/{idTransaction}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateSales(@PathVariable("idTransaction") String idTransaction, @RequestBody Report report) {
@@ -279,7 +279,7 @@ public class ReportController {
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
-    //--------------------------------Find All With Pagination---------------------
+    //----------(7)----------------------Find All With Pagination---------------------
     @RequestMapping(value = "/report/paging/", method = RequestMethod.GET)
     public ResponseEntity<?>getrreportWithPaging(@RequestParam int page, @RequestParam int limit){
         List<Report>reportList = reportService.findAllReportWithPaging(page,limit);
@@ -290,7 +290,7 @@ public class ReportController {
             return new ResponseEntity<>(reportList ,HttpStatus.OK);
         }
     }
-    //---------------------------------------DELETE BY ID-------------------------------------
+    //-------------(8)--------------------------DELETE BY ID-------------------------------------
     @RequestMapping(value = "/report/{idTransaction}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteReportbyId(@PathVariable("idTransaction") String idTransaction) {
         logger.info("Fetching & Deleting Report with id {}", idTransaction);
