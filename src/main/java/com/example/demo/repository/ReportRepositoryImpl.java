@@ -1,9 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.BiayaObat;
-import com.example.demo.model.Pasien;
-import com.example.demo.model.Report;
-import com.example.demo.model.Tindakan;
+import com.example.demo.model.*;
 import com.example.demo.service.DokterService;
 import com.example.demo.service.PasienService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -260,6 +257,9 @@ public class ReportRepositoryImpl implements ReportRepository {
 
     @Override
     public void updateListRepositoryReport(Report report) {
+            jdbcTemplate.update("update report set idPasien=? , idDokter=? ,tglTransaction=? where idTransaction=?",
+                    report.getIdPasien(),report.getIdDokter(),
+                    report.getTglTransaction(),report.getIdTransaction());
         jdbcTemplate.update("delete from detailobat where idTransaction=?", report.getIdTransaction());
         jdbcTemplate.update("delete from detailtindakan where idTransaction=?", report.getIdTransaction());
         List<BiayaObat> biayaObatList = report.getBiayaObatList();
@@ -274,6 +274,7 @@ public class ReportRepositoryImpl implements ReportRepository {
                     biayaObatList.get(i).getQty()
             );
         }
+
         List<Tindakan> tindakanList = report.getTindakanList();
         for (int i = 0; i < tindakanList.size(); i++) {
             UUID idDetailTindakan = UUID.randomUUID();

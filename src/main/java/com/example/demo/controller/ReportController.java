@@ -51,7 +51,7 @@ public class ReportController {
     // --------------------------------------------------Create a Report WITH VALIDATION----------------------------------------------
 
     @RequestMapping(value = "/report/", method = RequestMethod.POST)
-    public ResponseEntity<?> createReport(@RequestBody Report report) throws Exception{
+    public ResponseEntity<?> createReport(@RequestBody Report report) throws Exception {
 
         //-----------------------------------------------validation Obat-------------------------------------------------------------------------
         //VALIDATION ID OBAT !=TRUE AND QTY BUY OBAT < QTY STOCK
@@ -59,9 +59,9 @@ public class ReportController {
         List<BiayaObat> biayaObatList = report.getBiayaObatList();
         for (int i = 0; i < biayaObatList.size(); i++) {
             BiayaObat biayaObat = biayaObatService.findByIdBiayaObatService(report.getBiayaObatList().get(i).getIdObat());
-            if(biayaObat == null){
+            if (biayaObat == null) {
                 logger.error("idObat is Not found");
-                return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat "+report.getBiayaObatList().get(i).getIdObat() + " No Found"),HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat " + report.getBiayaObatList().get(i).getIdObat() + " No Found"), HttpStatus.NOT_FOUND);
             }
             if (biayaObat.isStatus() != true) {
                 logger.error("idObat not Avaliable");
@@ -77,7 +77,7 @@ public class ReportController {
         List<Tindakan> tindakanList = report.getTindakanList();
         for (int i = 0; i < tindakanList.size(); i++) {
             Tindakan tindakan = tindakanService.findByIdTindakanService(report.getTindakanList().get(i).getIdTindakan());
-            if(tindakan == null){
+            if (tindakan == null) {
                 logger.error("idDokter not Found in Praktek");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id Tindakan " + report.getTindakanList().get(i).getIdTindakan() + " already not Found."), HttpStatus.FOUND);
             }
@@ -87,13 +87,13 @@ public class ReportController {
             }
         }
 
-       // ------------------------------------------VALIDATION ID DOKTER AND STATUS---------------------------------
+        // ------------------------------------------VALIDATION ID DOKTER AND STATUS---------------------------------
         Dokter dokter = dokterService.findByIdDokterService(report.getIdDokter());
-        if(dokter == null){
+        if (dokter == null) {
             logger.error("idDokter not Found in Praktek");
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdPraktek " + report.getIdDokter() + " already not Found."), HttpStatus.FOUND);
         }
-        if (!(dokter.getTglPraktek().equalsIgnoreCase(report.getTglTransaction()))){
+        if (!(dokter.getTglPraktek().equalsIgnoreCase(report.getTglTransaction()))) {
             logger.error("TanggalTransaction not same in Praktek");
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with TglPraktek Dokter " + report.getTglTransaction() + " already not same."), HttpStatus.FOUND);
         }
@@ -105,25 +105,20 @@ public class ReportController {
 
 /////------------------------------------------------------VALIDATION PASIEN---------------------------
         Pasien pasien = pasienService.findByIdPasienService(report.getIdPasien());
-        if(pasien == null){
+        if (pasien == null) {
             logger.error("idPasien not Avaliable");
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id " + report.getIdPasien() + " already not Found."), HttpStatus.NOT_FOUND);
         }
         if (pasien.isStatus() != true) {
             logger.error("idPasien not Avaliable");
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id " + report.getIdPasien() + " already not Avaliable."), HttpStatus.CONFLICT);
-        }
-
-        else {
+        } else {
             logger.info("Creating Report : {}", report);
             reportService.saveReport(report);
             return new ResponseEntity<>(report, HttpStatus.CREATED);
         }
 
     }
-
-
-
 
 
     //(3)-----OKE---------------------------Find By ID-----------------------------------------------
@@ -177,9 +172,11 @@ public class ReportController {
         List<BiayaObat> biayaObatList = report.getBiayaObatList();
         for (int i = 0; i < biayaObatList.size(); i++) {
             BiayaObat biayaObat = biayaObatService.findByIdBiayaObatService(report.getBiayaObatList().get(i).getIdObat());
-            if(biayaObat == null){
+
+
+            if (biayaObat == null) {
                 logger.error("idObat is Not found");
-                return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat "+report.getBiayaObatList().get(i).getIdObat() + " No Found"),HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat " + report.getBiayaObatList().get(i).getIdObat() + " No Found"), HttpStatus.NOT_FOUND);
             }
             if (biayaObat.isStatus() != true) {
                 logger.error("idObat not Avaliable");
@@ -195,7 +192,7 @@ public class ReportController {
         List<Tindakan> tindakanList = report.getTindakanList();
         for (int i = 0; i < tindakanList.size(); i++) {
             Tindakan tindakan = tindakanService.findByIdTindakanService(report.getTindakanList().get(i).getIdTindakan());
-            if(tindakan == null){
+            if (tindakan == null) {
                 logger.error("idDokter not Found in Praktek");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id Tindakan " + report.getTindakanList().get(i).getIdTindakan() + " already not Found."), HttpStatus.FOUND);
             }
@@ -204,6 +201,33 @@ public class ReportController {
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with idTindakan " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.CONFLICT);
             }
         }
+
+        // ------------------------------------------VALIDATION ID DOKTER AND STATUS---------------------------------
+        Dokter dokter = dokterService.findByIdDokterService(report.getIdDokter());
+        if (dokter == null) {
+            logger.error("idDokter not Found in Praktek");
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdPraktek " + report.getIdDokter() + " already not Found."), HttpStatus.FOUND);
+        }
+        if (!(dokter.getTglPraktek().equalsIgnoreCase(report.getTglTransaction()))) {
+            logger.error("TanggalTransaction not same in Praktek");
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with TglPraktek Dokter " + report.getTglTransaction() + " already not same."), HttpStatus.FOUND);
+        }
+        if (dokter.isStatus() != true) {
+            logger.error("idDokter not Avaliable in Praktek");
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdPraktek " + report.getIdDokter() + " already not avaliable."), HttpStatus.CONFLICT);
+        }
+
+
+/////------------------------------------------------------VALIDATION PASIEN---------------------------
+        Pasien pasien = pasienService.findByIdPasienService(report.getIdPasien());
+        if (pasien == null) {
+            logger.error("idPasien not Avaliable");
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id " + report.getIdPasien() + " already not Found."), HttpStatus.NOT_FOUND);
+        }
+        if (pasien.isStatus() != true) {
+            logger.error("idPasien not Avaliable");
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id " + report.getIdPasien() + " already not Avaliable."), HttpStatus.CONFLICT);
+        }
         Report currentReport = reportService.findByIdReport(idTransaction);
 
         if (currentReport == null) {
@@ -211,6 +235,10 @@ public class ReportController {
             return new ResponseEntity<>(new CustomErrorType("Unable to update. Report with id " + idTransaction + " not found."),
                     HttpStatus.NOT_FOUND);
         }
+
+        currentReport.setIdPasien(report.getIdPasien());
+        currentReport.setIdDokter(report.getIdDokter());
+        currentReport.setIdTransaction(report.getIdTransaction());
         reportService.updateListServiceReport(report);
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
