@@ -22,6 +22,12 @@ public class TindakanServiceImpl implements TindakanService{
     }
 
     @Override
+    public List<Tindakan> findAllTindakanServicetrue() {
+        List<Tindakan> tindakanList = tindakanRepository.findAllTindakanRepositorytrue();
+        return tindakanList;
+    }
+
+    @Override
     public void saveTindakanService(Tindakan tindakan) {
         synchronized (this) {
             tindakanRepository.saveTindakanRepository(tindakan);

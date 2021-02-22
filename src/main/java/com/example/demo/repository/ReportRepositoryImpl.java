@@ -1,9 +1,11 @@
 package com.example.demo.repository;
 
-
 import com.example.demo.model.BiayaObat;
+import com.example.demo.model.Pasien;
 import com.example.demo.model.Report;
 import com.example.demo.model.Tindakan;
+import com.example.demo.service.DokterService;
+import com.example.demo.service.PasienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,16 +16,21 @@ import java.util.UUID;
 @Repository("reportRepository")
 public class ReportRepositoryImpl implements ReportRepository {
 
+@Autowired
+    PasienService pasienService;
+@Autowired
+    DokterService dokterService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
     public void saveReport(Report report) {
         UUID reportID = UUID.randomUUID();
-        jdbcTemplate.update("INSERT INTO report(idTransaction,idPasien,idDokter,tglTransaction) VALUES (?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO report(idTransaction,idPasien,idDokter,tglTransaction,status) VALUES (?,?,?,?,?)",
                 reportID.toString(),
                 report.getIdPasien(),
                 report.getIdDokter(),
-                report.getTglTransaction()
+                report.getTglTransaction(),
+                report.isStatus()
         );
         List<BiayaObat> biayaObatList = report.getBiayaObatList();
         for (int i = 0; i < biayaObatList.size(); i++) {
@@ -36,7 +43,9 @@ public class ReportRepositoryImpl implements ReportRepository {
                     biayaObatList.get(i).getIdObat(),
                     biayaObatList.get(i).getQty()
             );
+
         }
+
         List<Tindakan> tindakanList = report.getTindakanList();
         for (int i = 0; i < tindakanList.size(); i++) {
             UUID idDetailTindakan = UUID.randomUUID();
@@ -51,8 +60,6 @@ public class ReportRepositoryImpl implements ReportRepository {
         }
 
 
-
-
     }
 
     @Override
@@ -62,8 +69,11 @@ public class ReportRepositoryImpl implements ReportRepository {
                         new Report(
                                 rs.getString("idTransaction"),
                                 rs.getString("idPasien"),
+                                null,
                                 rs.getString("idDokter"),
-                                rs.getDate("tglTransaction"),
+                                null,
+                                rs.getString("tglTransaction"),
+                                rs.getBoolean("status"),
                                 null,
                                 0,
                                 0,
@@ -74,6 +84,7 @@ public class ReportRepositoryImpl implements ReportRepository {
                                 0
                         )
         );
+
         for (Report report : reportList) {
             report.setBiayaObatList(jdbcTemplate.query("select ob.idObat, ob.namaObat, db.qty, ob.harga ,ob.status,db.qty*ob.harga as totalHarga  from " +
                             "detailobat db Join obat ob ON db.idObat = ob.idObat where db.idTransaction=? ",
@@ -86,7 +97,74 @@ public class ReportRepositoryImpl implements ReportRepository {
                             rs.getInt("totalHarga"),
                             rs.getBoolean("status")
 
-                    )));
+                    )
+                    )
+            );
+            report.setTindakanList(jdbcTemplate.query("select td.idTindakan, td.namaTindakan, td.biayaTindakan,td.status from " +
+                            "detailtindakan dt Join tindakan td ON dt.idTindakan = td.idTindakan where dt.idTransaction=? ",
+                    preparedStatement -> preparedStatement.setString(1, report.getIdTransaction()),
+                    (rs, rowNum) -> new Tindakan(
+                            rs.getString("idTindakan"),
+                            rs.getString("namaTindakan"),
+                            rs.getInt("biayaTindakan"),
+                         rs.getBoolean("status")
+
+                    )
+            )
+            );
+        report.setTotalHargaObat();
+        report.setPpnObat();
+        report.setTotalPembayaranObat();
+        report.setTotalHargaTindakan();
+        report.setPpnTindakan();
+        report.setTotalTindakan();
+        report.setDokter(dokterService.findByIdDokterService(report.getIdDokter()));
+        report.setPasien(pasienService.findByIdPasienService(report.getIdPasien()));
+
+        }
+        return reportList;
+
+    }
+
+    @Override
+    public Report findByIdReportRepository(String idTransaction) {
+        Report report;
+      report = jdbcTemplate.queryForObject("select *from report where  idTransaction =?",
+                new Object[]{idTransaction},
+                (rs, rowNum) ->
+                        new Report(
+                                rs.getString("idTransaction"),
+                                rs.getString("idPasien"),
+                                null,
+                                rs.getString("idDokter"),
+                                null,
+                                rs.getString("tglTransaction"),
+                                rs.getBoolean("status"),
+                                null,
+                                0,
+                                0,
+                                0,
+                                null,
+                                0,
+                                0,
+                                0
+                        )
+        );
+
+            report.setBiayaObatList(jdbcTemplate.query("select ob.idObat, ob.namaObat, db.qty, ob.harga ,ob.status,db.qty*ob.harga as totalHarga  from " +
+                            "detailobat db Join obat ob ON db.idObat = ob.idObat where db.idTransaction=? ",
+                    preparedStatement -> preparedStatement.setString(1, report.getIdTransaction()),
+                    (rs, rowNum) -> new BiayaObat(
+                            rs.getString("idObat"),
+                            rs.getString("namaObat"),
+                            rs.getInt("qty"),
+                            rs.getInt("harga"),
+                            rs.getInt("totalHarga"),
+                            rs.getBoolean("status")
+
+                    )
+                    )
+            );
             report.setTindakanList(jdbcTemplate.query("select td.idTindakan, td.namaTindakan, td.biayaTindakan,td.status from " +
                             "detailtindakan dt Join tindakan td ON dt.idTindakan = td.idTindakan where dt.idTransaction=? ",
                     preparedStatement -> preparedStatement.setString(1, report.getIdTransaction()),
@@ -96,18 +174,120 @@ public class ReportRepositoryImpl implements ReportRepository {
                             rs.getInt("biayaTindakan"),
                             rs.getBoolean("status")
 
-                    )));
-        report.setTotalHargaObat();
-        report.setPpnObat();
-        report.setTotalPembayaranObat();
-        report.setTotalHargaTindakan();
-        report.setPpnTindakan();
-        report.setTotalTindakan();
+                    )
+                    )
+            );
+            report.setTotalHargaObat();
+            report.setPpnObat();
+            report.setTotalPembayaranObat();
+            report.setTotalHargaTindakan();
+            report.setPpnTindakan();
+            report.setTotalTindakan();
+            report.setDokter(dokterService.findByIdDokterService(report.getIdDokter()));
+            report.setPasien(pasienService.findByIdPasienService(report.getIdPasien()));
+
+        return report;
+    }
+
+    @Override
+    public List<Report> findAllReportStatus() {
+        List<Report> reportList = jdbcTemplate.query("select *from report where status = 1",
+                (rs, rowNum) ->
+                        new Report(
+                                rs.getString("idTransaction"),
+                                rs.getString("idPasien"),
+                                null,
+                                rs.getString("idDokter"),
+                                null,
+                                rs.getString("tglTransaction"),
+                                rs.getBoolean("status"),
+                                null,
+                                0,
+                                0,
+                                0,
+                                null,
+                                0,
+                                0,
+                                0
+                        )
+        );
+
+        for (Report report : reportList) {
+            report.setBiayaObatList(jdbcTemplate.query("select ob.idObat, ob.namaObat, db.qty, ob.harga ,ob.status,db.qty*ob.harga as totalHarga  from " +
+                            "detailobat db Join obat ob ON db.idObat = ob.idObat where db.idTransaction=? ",
+                    preparedStatement -> preparedStatement.setString(1, report.getIdTransaction()),
+                    (rs, rowNum) -> new BiayaObat(
+                            rs.getString("idObat"),
+                            rs.getString("namaObat"),
+                            rs.getInt("qty"),
+                            rs.getInt("harga"),
+                            rs.getInt("totalHarga"),
+                            rs.getBoolean("status")
+
+                    )
+                    )
+            );
+            report.setTindakanList(jdbcTemplate.query("select td.idTindakan, td.namaTindakan, td.biayaTindakan,td.status from " +
+                            "detailtindakan dt Join tindakan td ON dt.idTindakan = td.idTindakan where dt.idTransaction=? ",
+                    preparedStatement -> preparedStatement.setString(1, report.getIdTransaction()),
+                    (rs, rowNum) -> new Tindakan(
+                            rs.getString("idTindakan"),
+                            rs.getString("namaTindakan"),
+                            rs.getInt("biayaTindakan"),
+                            rs.getBoolean("status")
+
+                    )
+                    )
+            );
+            report.setTotalHargaObat();
+            report.setPpnObat();
+            report.setTotalPembayaranObat();
+            report.setTotalHargaTindakan();
+            report.setPpnTindakan();
+            report.setTotalTindakan();
+            report.setDokter(dokterService.findByIdDokterService(report.getIdDokter()));
+            report.setPasien(pasienService.findByIdPasienService(report.getIdPasien()));
 
         }
         return reportList;
-
     }
 
+    @Override
+    public void updateStatusRepositoryReport(Report report) {
+            jdbcTemplate.update("update report set status=? where idTransaction=?",
+                    report.isStatus(),report.getIdPasien());
+    }
+
+    @Override
+    public void updateListRepositoryReport(Report report) {
+        jdbcTemplate.update("delete from detailobat where idTransaction=?", report.getIdTransaction());
+        jdbcTemplate.update("delete from detailtindakan where idTransaction=?", report.getIdTransaction());
+        List<BiayaObat> biayaObatList = report.getBiayaObatList();
+        for (int i = 0; i < biayaObatList.size(); i++) {
+            UUID idDetailObat = UUID.randomUUID();
+            jdbcTemplate.update(
+                    "INSERT INTO detailobat(idDetailObat,idTransaction,idObat,qty)" +
+                            "VALUES (?,?,?,?)",
+                    idDetailObat.toString(),
+                    report.getIdTransaction(),
+                    biayaObatList.get(i).getIdObat(),
+                    biayaObatList.get(i).getQty()
+            );
+        }
+        List<Tindakan> tindakanList = report.getTindakanList();
+        for (int i = 0; i < tindakanList.size(); i++) {
+            UUID idDetailTindakan = UUID.randomUUID();
+            jdbcTemplate.update(
+                    "INSERT INTO detailtindakan(idDetailTindakan,idTransaction,idTindakan)" +
+                            "VALUES (?,?,?)",
+                    idDetailTindakan.toString(),
+                    report.getIdTransaction(),
+                    tindakanList.get(i).getIdTindakan()
+            );
+
+        }
+
+
+    }
 
 }

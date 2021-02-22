@@ -30,6 +30,19 @@ public class TindakanRepositoryImpl implements TindakanRepository {
     }
 
     @Override
+    public List<Tindakan> findAllTindakanRepositorytrue() {
+        return jdbcTemplate.query("select *from tindakan where status = 1",
+                (rs,rowNum)->
+                        new Tindakan(
+                                rs.getString("idTindakan"),
+                                rs.getString("namaTindakan"),
+                                rs.getInt("biayaTindakan"),
+                                rs.getBoolean("status")
+                        )
+        );
+    }
+
+    @Override
     public void saveTindakanRepository(Tindakan tindakan) {
         UUID idTindakan = UUID.randomUUID();
         jdbcTemplate.update("INSERT INTO tindakan(idTindakan, namaTindakan, biayaTindakan, status)values(?,?,?,?)",

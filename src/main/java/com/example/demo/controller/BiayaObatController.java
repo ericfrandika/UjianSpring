@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/klinik/master")
 public class BiayaObatController {
     public static final Logger logger = LoggerFactory.getLogger(BiayaObatController.class);
     @Autowired
@@ -24,9 +25,15 @@ public class BiayaObatController {
     //(1)----------OKE-------------------------CREAT DATA PASIEN---------------------------------
     @RequestMapping(value = "/obat/", method = RequestMethod.POST)
     public ResponseEntity<?> crateObat(@RequestBody BiayaObat biayaObat) {
-        logger.info("Creating Obat : {}", biayaObat);
-        biayaObatService.saveBiayaObatService(biayaObat);
-        return new ResponseEntity<>(biayaObat, HttpStatus.OK);
+        if (biayaObatService.isObatExist(biayaObat)) {
+            logger.error("Unable to create. A BiayaObat with name {} already exist", biayaObat.getNamaObat());
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Obat with name " + biayaObat.getNamaObat() + " already exist."), HttpStatus.CONFLICT);
+        }
+        else {
+            logger.info("Creating Obat : {}", biayaObat);
+            biayaObatService.saveBiayaObatService(biayaObat);
+            return new ResponseEntity<>(biayaObat, HttpStatus.OK);
+        }
 
     }
 
@@ -35,6 +42,18 @@ public class BiayaObatController {
     @RequestMapping(value = "/obat/", method = RequestMethod.GET)
     public ResponseEntity<List<BiayaObat>> listAllObat() {
         List<BiayaObat> biayaObatList = biayaObatService.findAllBiayaObatService();
+        if (biayaObatList.isEmpty()) {
+            return new ResponseEntity<>(biayaObatList, HttpStatus.NOT_FOUND);
+        }
+        else {
+            return new ResponseEntity<>(biayaObatList, HttpStatus.OK);
+        }
+    }
+    //(2)--------OKE------------------------Find ALl DATA Pasien status True----------------------------------
+
+    @RequestMapping(value = "/obat/true/", method = RequestMethod.GET)
+    public ResponseEntity<List<BiayaObat>> listAllObatTrue() {
+        List<BiayaObat> biayaObatList = biayaObatService.findAllBiayaObatServicetrue();
         if (biayaObatList.isEmpty()) {
             return new ResponseEntity<>(biayaObatList, HttpStatus.NOT_FOUND);
         }
@@ -95,12 +114,13 @@ public class BiayaObatController {
             else{
                 currentBiayaObat.setStatus(true);
             }
+            biayaObatService.updateBiayaObatService(currentBiayaObat);
             return new ResponseEntity<>(currentBiayaObat, HttpStatus.OK);
         }
     }
 
 
-    //(6)----------OKE----------------------------Update Status Pasien----------------------------------------------------
+    //(6)----------OKE----------------------------Update Status Obat----------------------------------------------------
     @RequestMapping(value = "/obat/status/{idObat}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateStatusObat(@PathVariable("idObat") String idObat, @RequestBody BiayaObat biayaObat) {
         logger.info("Updating Status BiayaObat with id {}", idObat);
@@ -114,12 +134,12 @@ public class BiayaObatController {
         }
         else {
             currentBiayaObat.setStatus(biayaObat.isStatus());
-            biayaObatService.updateBiayaObatService(currentBiayaObat);
+            biayaObatService.updateStatusServiceBiayaObat(currentBiayaObat);
             return new ResponseEntity<>(currentBiayaObat, HttpStatus.OK);
         }
     }
 
-//--(7)----------------OKE-------------------DELETE ALL PASIEN---------------------------------------------
+//--(7)----------------OKE-------------------DELETE ALL Obat---------------------------------------------
 
     @RequestMapping(value = "/obat/", method = RequestMethod.DELETE)
     public ResponseEntity<BiayaObat> deleteAllObat() {
@@ -128,7 +148,7 @@ public class BiayaObatController {
         return new ResponseEntity<BiayaObat>(HttpStatus.NO_CONTENT);
     }
 
-    //--(8)----------Oke----------------------------Delete ID PASIEN-------------------------------------------
+    //--(8)----------Oke----------------------------Delete ID Obat-------------------------------------------
 
 
     @RequestMapping(value = "/obat/{id}", method = RequestMethod.DELETE)

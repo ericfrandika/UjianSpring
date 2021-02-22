@@ -33,6 +33,24 @@ public class PasienRepositoryImpl implements PasienRepository{
     }
 
     @Override
+    public List<Pasien> findAllPasienRepositorytrue() {
+        return jdbcTemplate.query("select *from pasien where status = 1",
+                (rs,rowNum)->
+                        new Pasien(
+                                rs.getString("idPasien"),
+                                rs.getString("namaPasien"),
+                                rs.getString("tempat"),
+                                rs.getDate("tglLahir"),
+                                rs.getString("gender"),
+                                rs.getString("noTelp"),
+                                rs.getString("alamat"),
+                                rs.getBoolean("status")
+
+                        )
+        );
+    }
+
+    @Override
     public void savePasienRepository(Pasien pasien) {
         UUID idPasien = UUID.randomUUID();
         jdbcTemplate.update("INSERT INTO pasien(idPasien, namaPasien,tempat,tglLahir,gender,noTelp,alamat,status)values(?,?,?,?,?,?,?,?)",

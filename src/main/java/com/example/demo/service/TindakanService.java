@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TindakanService {
     List<Tindakan> findAllTindakanService();
+    List<Tindakan> findAllTindakanServicetrue();
+
     void saveTindakanService(Tindakan tindakan);
     void updateTindakanService(Tindakan tindakan);
     void deleteAllTindakanService();

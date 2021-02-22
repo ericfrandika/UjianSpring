@@ -6,8 +6,12 @@ import java.util.List;
 public class Report {
     private String idTransaction;
     private String idPasien;
+    private Pasien pasien;
     private String idDokter;
-    private Date tglTransaction;
+    private Dokter dokter;
+    private String tglTransaction;
+    private boolean status;
+
     List<BiayaObat>biayaObatList;
     private double totalHargaObat;
     private double ppnObat;
@@ -17,11 +21,16 @@ public class Report {
     private double ppnTindakan;
     private double totalTindakan;
 
-    public Report(String idTransaction, String idPasien, String idDokter, Date tglTransaction, List<BiayaObat> biayaObatList, double totalHargaObat, double ppnObat, double totalPembayaranObat, List<Tindakan> tindakanList, double totalHargaTindakan, double ppnTindakan, double totalTindakan) {
+
+
+    public Report(String idTransaction, String idPasien, Pasien pasien, String idDokter, Dokter dokter, String tglTransaction, boolean status, List<BiayaObat> biayaObatList, double totalHargaObat, double ppnObat, double totalPembayaranObat, List<Tindakan> tindakanList, double totalHargaTindakan, double ppnTindakan, double totalTindakan) {
         this.idTransaction = idTransaction;
         this.idPasien = idPasien;
+        this.pasien = pasien;
         this.idDokter = idDokter;
+        this.dokter = dokter;
         this.tglTransaction = tglTransaction;
+        this.status = status;
         this.biayaObatList = biayaObatList;
         this.totalHargaObat = totalHargaObat;
         this.ppnObat = ppnObat;
@@ -30,6 +39,14 @@ public class Report {
         this.totalHargaTindakan = totalHargaTindakan;
         this.ppnTindakan = ppnTindakan;
         this.totalTindakan = totalTindakan;
+    }
+
+    public String getTglTransaction() {
+        return tglTransaction;
+    }
+
+    public void setTglTransaction(String tglTransaction) {
+        this.tglTransaction = tglTransaction;
     }
 
     public String getIdTransaction() {
@@ -56,13 +73,7 @@ public class Report {
         this.idDokter = idDokter;
     }
 
-    public Date getTglTransaction() {
-        return tglTransaction;
-    }
 
-    public void setTglTransaction(Date tglTransaction) {
-        this.tglTransaction = tglTransaction;
-    }
 
     public List<BiayaObat> getBiayaObatList() {
         return biayaObatList;
@@ -78,6 +89,14 @@ public class Report {
 
     public void setTindakanList(List<Tindakan> tindakanList) {
         this.tindakanList = tindakanList;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     ////////////////////Hitung Total Obat-----------------------
@@ -147,5 +166,21 @@ public class Report {
         double totalTindakan = 0;
         totalTindakan = (getTotalHargaTindakan()+getPpnTindakan());
         this.totalTindakan = totalTindakan;
+    }
+
+    public Pasien getPasien() {
+        return pasien;
+    }
+
+    public void setPasien(Pasien pasien) {
+        this.pasien = pasien;
+    }
+
+    public Dokter getDokter() {
+        return dokter;
+    }
+
+    public void setDokter(Dokter dokter) {
+        this.dokter = dokter;
     }
 }

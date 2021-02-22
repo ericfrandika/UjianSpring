@@ -22,6 +22,12 @@ public class DokterServiceImpl  implements DokterService{
     }
 
     @Override
+    public List<Dokter> findAllDokterServicetrue() {
+        List<Dokter> dokterList = dokterRepository.findAllDokterRepositorytrue();
+        return dokterList;
+    }
+
+    @Override
     public void saveDokterService(Dokter dokter) {
         synchronized (this) {
             dokterRepository.saveDokterRepository(dokter);
@@ -55,8 +61,14 @@ public class DokterServiceImpl  implements DokterService{
     @Override
     public Dokter findByIdDokterService(String idDokter) {
         Dokter obj;
-
-        return obj = dokterRepository.findByIdDokterRepository(idDokter);
+        try {
+            obj = dokterRepository.findByIdDokterRepository(idDokter);
+            return obj;
+        }catch (EmptyResultDataAccessException e){
+            System.out.println(e);
+            obj =null;
+        }
+        return obj;
     }
 
     @Override

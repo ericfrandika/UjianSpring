@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/klinik/master")
 public class TindakanController {
     public static final Logger logger = LoggerFactory.getLogger(TindakanController.class);
     @Autowired
@@ -37,6 +38,18 @@ public class TindakanController {
     @RequestMapping(value = "/tindakan/", method = RequestMethod.GET)
     public ResponseEntity<List<Tindakan>> listAllTindakan() {
         List<Tindakan> tindakanList = tindakanService.findAllTindakanService();
+        if (tindakanList.isEmpty()) {
+            return new ResponseEntity<>(tindakanList, HttpStatus.NOT_FOUND);
+        }
+        else {
+            return new ResponseEntity<>(tindakanList, HttpStatus.OK);
+        }
+    }
+    //(2)--------OKE------------------------Find ALl DATA Pasien----------------------------------
+
+    @RequestMapping(value = "/tindakan/true/", method = RequestMethod.GET)
+    public ResponseEntity<List<Tindakan>> listAllTindakantrue() {
+        List<Tindakan> tindakanList = tindakanService.findAllTindakanServicetrue();
         if (tindakanList.isEmpty()) {
             return new ResponseEntity<>(tindakanList, HttpStatus.NOT_FOUND);
         }

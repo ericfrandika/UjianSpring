@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface BiayaObatRepository {
     List<BiayaObat> findAllBiayaObatRepository();
+    List<BiayaObat> findAllBiayaObatRepositorytrue();
 
     void saveBiayaObatRepository(BiayaObat biayaObat);
 

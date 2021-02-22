@@ -5,13 +5,14 @@ import java.util.Date;
 public class Dokter {
     private String idDokter;
     private String namaDokter;
-    private Date tglPraktek;
+    private String tglPraktek;
     private String gender;
     private String noTelp;
     private String alamat;
     private boolean status;
 
-    public Dokter(String idDokter, String namaDokter, Date tglPraktek, String gender, String noTelp, String alamat, boolean status) {
+
+    public Dokter(String idDokter, String namaDokter, String tglPraktek, String gender, String noTelp, String alamat, boolean status) {
         this.idDokter = idDokter;
         this.namaDokter = namaDokter;
         this.tglPraktek = tglPraktek;
@@ -19,6 +20,14 @@ public class Dokter {
         this.noTelp = noTelp;
         this.alamat = alamat;
         this.status = status;
+    }
+
+    public String getTglPraktek() {
+        return tglPraktek;
+    }
+
+    public void setTglPraktek(String tglPraktek) {
+        this.tglPraktek = tglPraktek;
     }
 
     public String getIdDokter() {
@@ -37,13 +46,7 @@ public class Dokter {
         this.namaDokter = namaDokter;
     }
 
-    public Date getTglPraktek() {
-        return tglPraktek;
-    }
 
-    public void setTglPraktek(Date tglPraktek) {
-        this.tglPraktek = tglPraktek;
-    }
 
     public String getGender() {
         return gender;

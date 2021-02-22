@@ -22,6 +22,12 @@ public class BiayaObatServiceImpl implements BiayaObatService {
     }
 
     @Override
+    public List<BiayaObat> findAllBiayaObatServicetrue() {
+        List<BiayaObat>biayaObatList = biayaObatRepository.findAllBiayaObatRepositorytrue();
+        return biayaObatList;
+    }
+
+    @Override
     public void saveBiayaObatService(BiayaObat biayaObat) {
         synchronized (this) {
             biayaObatRepository.saveBiayaObatRepository(biayaObat);
@@ -83,5 +89,9 @@ public class BiayaObatServiceImpl implements BiayaObatService {
                 System.out.println(e);
             }
         }
+    }
+
+    public boolean isObatExist(BiayaObat obat) {
+        return findByNameBiayaObatService(obat.getNamaObat()) !=null;
     }
 }

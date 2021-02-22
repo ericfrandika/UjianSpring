@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface DokterService {
     List<Dokter> findAllDokterService();
+    List<Dokter> findAllDokterServicetrue();
     void saveDokterService(Dokter dokter);
     void updateDokterService(Dokter dokter);
     void deleteAllDokterService();

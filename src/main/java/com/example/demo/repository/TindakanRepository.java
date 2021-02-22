@@ -6,6 +6,7 @@ import java.util.List;
 public interface TindakanRepository {
 
     List<Tindakan> findAllTindakanRepository();
+    List<Tindakan> findAllTindakanRepositorytrue();
 
     void saveTindakanRepository(Tindakan tindakan);
 

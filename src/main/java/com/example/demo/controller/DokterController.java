@@ -13,7 +13,8 @@ import org.slf4j.Logger;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/klinik/master")
 public class DokterController {
     public static final Logger logger = (Logger) LoggerFactory.getLogger(DokterController.class);
 
@@ -37,6 +38,18 @@ public class DokterController {
     @RequestMapping(value = "/dokter/", method = RequestMethod.GET)
     public ResponseEntity<List<Dokter>> listAllDokter() {
         List<Dokter> dokterList = dokterService.findAllDokterService();
+        if (dokterList.isEmpty()) {
+            return new ResponseEntity<>(dokterList, HttpStatus.NOT_FOUND);
+        }
+        else {
+            return new ResponseEntity<>(dokterList, HttpStatus.OK);
+        }
+    }
+    //(2)--------OKE------------------------Find ALl DATA DOKTER----------------------------------
+
+    @RequestMapping(value = "/dokter/true/", method = RequestMethod.GET)
+    public ResponseEntity<List<Dokter>> listAllDokterTrue() {
+        List<Dokter> dokterList = dokterService.findAllDokterServicetrue();
         if (dokterList.isEmpty()) {
             return new ResponseEntity<>(dokterList, HttpStatus.NOT_FOUND);
         }

@@ -20,7 +20,23 @@ public class DokterRepositoryImpl implements DokterRepository {
                         new Dokter(
                                 rs.getString("idDokter"),
                                 rs.getString("namaDokter"),
-                                rs.getDate("tglPraktek"),
+                                rs.getString("tglPraktek"),
+                                rs.getString("gender"),
+                                rs.getString("noTelp"),
+                                rs.getString("alamat"),
+                                rs.getBoolean("status")
+                        )
+        );
+    }
+
+    @Override
+    public List<Dokter> findAllDokterRepositorytrue() {
+        return jdbcTemplate.query("select * from dokter where status =1",
+                (rs,rowNum)->
+                        new Dokter(
+                                rs.getString("idDokter"),
+                                rs.getString("namaDokter"),
+                                rs.getString("tglPraktek"),
                                 rs.getString("gender"),
                                 rs.getString("noTelp"),
                                 rs.getString("alamat"),
@@ -68,7 +84,7 @@ public class DokterRepositoryImpl implements DokterRepository {
                         new Dokter(
                                 rs.getString("idDokter"),
                                 rs.getString("namaDokter"),
-                                rs.getDate("tglPraktek"),
+                                rs.getString("tglPraktek"),
                                 rs.getString("gender"),
                                 rs.getString("noTelp"),
                                 rs.getString("alamat"),
@@ -85,7 +101,7 @@ public class DokterRepositoryImpl implements DokterRepository {
                         new Dokter(
                                 rs.getString("idDokter"),
                                 rs.getString("namaDokter"),
-                                rs.getDate("tglPraktek"),
+                                rs.getString("tglPraktek"),
                                 rs.getString("gender"),
                                 rs.getString("noTelp"),
                                 rs.getString("alamat"),
@@ -114,9 +130,10 @@ public class DokterRepositoryImpl implements DokterRepository {
         List<Dokter> dokterList = jdbcTemplate.query("SELECT * FROM dokter LIMIT " + start + "," + limit + ";",
                 (rs, rowNum) ->
                         new Dokter(
+
                                 rs.getString("idDokter"),
                                 rs.getString("namaDokter"),
-                                rs.getDate("tglPraktek"),
+                                rs.getString("tglPraktek"),
                                 rs.getString("gender"),
                                 rs.getString("noTelp"),
                                 rs.getString("alamat"),

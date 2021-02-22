@@ -30,6 +30,20 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
     }
 
     @Override
+    public List<BiayaObat> findAllBiayaObatRepositorytrue() {
+        return jdbcTemplate.query("select *from obat where status=1",
+                (rs,rowNum)->
+                        new BiayaObat(
+                                rs.getString("idObat"),
+                                rs.getString("namaObat"),
+                                rs.getInt("qty"),
+                                rs.getInt("harga"),
+                                rs.getBoolean("status")
+                        )
+        );
+    }
+
+    @Override
     public void saveBiayaObatRepository(BiayaObat biayaObat) {
         UUID idObat = UUID.randomUUID();
         jdbcTemplate.update("INSERT INTO obat(idObat, namaObat,qty,harga,status)values(?,?,?,?,?)",

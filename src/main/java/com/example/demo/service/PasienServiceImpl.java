@@ -22,6 +22,12 @@ public class PasienServiceImpl implements PasienService{
     }
 
     @Override
+    public List<Pasien> findAllPasienServicetrue() {
+        List<Pasien> pasienList = pasienRepository.findAllPasienRepositorytrue();
+        return pasienList;
+    }
+
+    @Override
     public void savePasienService(Pasien pasien) {
         synchronized (this) {
             pasienRepository.savePasienRepository(pasien);

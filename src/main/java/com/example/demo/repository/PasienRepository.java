@@ -7,9 +7,8 @@ import java.util.List;
 
 public interface PasienRepository {
     List<Pasien> findAllPasienRepository();
-
+    List<Pasien> findAllPasienRepositorytrue();
     void savePasienRepository(Pasien pasien);
-
     void updatePasienRepository(Pasien pasien);
 
     void deleteAllPasienRepository();
