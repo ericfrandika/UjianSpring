@@ -67,6 +67,16 @@ public class ReportServiceImpl implements ReportService {
         }
     }
 
+    @Override
+    public List<Report> findAllReportWithPaging(int page, int limit) {
+        return reportRepository.findAllReportWithPaging(page , limit);
+    }
 
+    @Override
+    public void deleteReportServicebyId(String idTransaction) {
+        synchronized (this){
+            reportRepository.deleteReportRepositorybyId(idTransaction);
+        }
+    }
 
 }

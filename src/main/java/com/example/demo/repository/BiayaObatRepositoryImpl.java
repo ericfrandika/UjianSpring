@@ -113,13 +113,13 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
     @Override
     public List<BiayaObat> findAllBiayaObatWithPaging(int page, int limit) {
         int numPages;
-        numPages = jdbcTemplate.query("SELECT COUNT(*) as count FROM dokter",
+        numPages = jdbcTemplate.query("SELECT COUNT(*) as count FROM obat",
                 (rs, rowNum) -> rs.getInt("count")).get(0);
 
         if (page < 1) page = 1;
         if (page > numPages) page = numPages;
         int start = (page - 1) * limit;
-        List<BiayaObat> biayaObatList = jdbcTemplate.query("SELECT * FROM dokter LIMIT " + start + "," + limit + ";",
+        List<BiayaObat> biayaObatList = jdbcTemplate.query("SELECT * FROM obat LIMIT " + start + "," + limit + ";",
                 (rs, rowNum) ->
                         new BiayaObat(
                                 rs.getString("idObat"),

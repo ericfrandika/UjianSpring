@@ -94,7 +94,5 @@ public class BiayaObatServiceImpl implements BiayaObatService {
     public boolean isObatExist(BiayaObat obat) {
         return findByNameBiayaObatService(obat.getNamaObat()) !=null;
     }
-    public boolean isObatExistId(BiayaObat obat){
-        return findByIdBiayaObatService(obat.getIdObat()) !=null;
-    }
+
 }

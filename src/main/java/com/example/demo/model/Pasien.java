@@ -99,4 +99,18 @@ public class Pasien {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Pasien{" +
+                "idPasien='" + idPasien + '\'' +
+                ", namaPasien='" + namaPasien + '\'' +
+                ", tempat='" + tempat + '\'' +
+                ", tglLahir=" + tglLahir +
+                ", gender='" + gender + '\'' +
+                ", noTelp='" + noTelp + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

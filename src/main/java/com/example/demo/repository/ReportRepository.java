@@ -12,6 +12,7 @@ public interface ReportRepository {
     List<Report> findAllReportStatus();
     void updateStatusRepositoryReport(Report report);
     void updateListRepositoryReport(Report report);
-
+    List<Report> findAllReportWithPaging(int page, int limit);
+    void deleteReportRepositorybyId(String idTransaction);
 
 }

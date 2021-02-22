@@ -27,10 +27,15 @@ public class TindakanController {
     //(1)----------OKE-------------------------CREAT DATA Tindakan---------------------------------
     @RequestMapping(value = "/tindakan/", method = RequestMethod.POST)
     public ResponseEntity<?> crateTindakan(@RequestBody Tindakan tindakan) {
-        logger.info("Creating Tindakan : {}", tindakan);
-        tindakanService.saveTindakanService(tindakan);
-        return new ResponseEntity<>(tindakan, HttpStatus.OK);
-
+        if (tindakanService.isTindakanExist(tindakan)) {
+            logger.error("Unable to create. A BiayaObat with name {} already exist", tindakan.getNamaTindakan());
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Tindakan with name " + tindakan.getNamaTindakan() + " already exist."), HttpStatus.CONFLICT);
+        }
+        else {
+            logger.info("Creating Tindakan : {}", tindakan);
+            tindakanService.saveTindakanService(tindakan);
+            return new ResponseEntity<>(tindakan, HttpStatus.OK);
+        }
     }
 
     //(2)--------OKE------------------------Find ALl DATA Pasien----------------------------------

@@ -20,10 +20,11 @@ public class Report {
     private double totalHargaTindakan;
     private double ppnTindakan;
     private double totalTindakan;
+    private double totalAll;
 
 
 
-    public Report(String idTransaction, String idPasien, Pasien pasien, String idDokter, Dokter dokter, String tglTransaction, boolean status, List<BiayaObat> biayaObatList, double totalHargaObat, double ppnObat, double totalPembayaranObat, List<Tindakan> tindakanList, double totalHargaTindakan, double ppnTindakan, double totalTindakan) {
+    public Report(String idTransaction, String idPasien, Pasien pasien, String idDokter, Dokter dokter, String tglTransaction, boolean status, List<BiayaObat> biayaObatList, double totalHargaObat, double ppnObat, double totalPembayaranObat, List<Tindakan> tindakanList, double totalHargaTindakan, double ppnTindakan, double totalTindakan, double totalAll) {
         this.idTransaction = idTransaction;
         this.idPasien = idPasien;
         this.pasien = pasien;
@@ -39,6 +40,7 @@ public class Report {
         this.totalHargaTindakan = totalHargaTindakan;
         this.ppnTindakan = ppnTindakan;
         this.totalTindakan = totalTindakan;
+        this.totalAll = totalAll;
     }
 
     public String getTglTransaction() {
@@ -168,6 +170,16 @@ public class Report {
         this.totalTindakan = totalTindakan;
     }
 
+    public double getTotalAll() {
+        return totalAll;
+    }
+
+    public void setTotalAll() {
+        double totalAll = 0;
+        totalAll = this.totalTindakan + this.totalPembayaranObat;
+        this.totalAll = totalAll;
+    }
+
     public Pasien getPasien() {
         return pasien;
     }
@@ -182,5 +194,27 @@ public class Report {
 
     public void setDokter(Dokter dokter) {
         this.dokter = dokter;
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "idTransaction='" + idTransaction + '\'' +
+                ", idPasien='" + idPasien + '\'' +
+                ", pasien=" + pasien +
+                ", idDokter='" + idDokter + '\'' +
+                ", dokter=" + dokter +
+                ", tglTransaction='" + tglTransaction + '\'' +
+                ", status=" + status +
+                ", biayaObatList=" + biayaObatList +
+                ", totalHargaObat=" + totalHargaObat +
+                ", ppnObat=" + ppnObat +
+                ", totalPembayaranObat=" + totalPembayaranObat +
+                ", tindakanList=" + tindakanList +
+                ", totalHargaTindakan=" + totalHargaTindakan +
+                ", ppnTindakan=" + ppnTindakan +
+                ", totalTindakan=" + totalTindakan +
+                ", totalAll=" + totalAll +
+                '}';
     }
 }

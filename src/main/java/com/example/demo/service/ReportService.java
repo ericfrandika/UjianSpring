@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Dokter;
+import com.example.demo.model.Pasien;
 import com.example.demo.model.Report;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface ReportService {
     List<Report> findAllReporttrue();
     void updateStatusServiceReport(Report report);
     void updateListServiceReport(Report report);
+    List<Report> findAllReportWithPaging(int page, int limit);
+    void deleteReportServicebyId(String idTransaction);
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.BiayaObat;
 import com.example.demo.model.Pasien;
 import com.example.demo.model.Tindakan;
 import com.example.demo.repository.TindakanRepository;
@@ -92,5 +93,8 @@ public class TindakanServiceImpl implements TindakanService{
         synchronized (this){
             tindakanRepository.updateTindakanRepositoryPasien(tindakan);
         }
+    }
+    public boolean isTindakanExist(Tindakan tindakan) {
+        return findByNameTindakanService(tindakan.getNamaTindakan()) !=null;
     }
 }

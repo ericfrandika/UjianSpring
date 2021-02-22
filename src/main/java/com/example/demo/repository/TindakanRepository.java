@@ -1,4 +1,5 @@
 package com.example.demo.repository;
+import com.example.demo.model.Report;
 import com.example.demo.model.Tindakan;
 
 import java.util.List;
@@ -6,6 +7,7 @@ import java.util.List;
 public interface TindakanRepository {
 
     List<Tindakan> findAllTindakanRepository();
+
     List<Tindakan> findAllTindakanRepositorytrue();
 
     void saveTindakanRepository(Tindakan tindakan);
@@ -23,4 +25,7 @@ public interface TindakanRepository {
     void updateTindakanRepositoryPasien(Tindakan tindakan);
 
     List<Tindakan> findAllTindakanWithPaging(int page, int limit);
+
 }
+
+

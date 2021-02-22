@@ -79,4 +79,17 @@ public class Dokter {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Dokter{" +
+                "idDokter='" + idDokter + '\'' +
+                ", namaDokter='" + namaDokter + '\'' +
+                ", tglPraktek='" + tglPraktek + '\'' +
+                ", gender='" + gender + '\'' +
+                ", noTelp='" + noTelp + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

@@ -63,6 +63,14 @@ public class ReportController {
                 logger.error("idObat is Not found");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat " + report.getBiayaObatList().get(i).getIdObat() + " No Found"), HttpStatus.NOT_FOUND);
             }
+            for (int j = 0; j < biayaObatList.size(); j++){
+                if (i != j){
+                    if (biayaObatList.get(j).getIdObat().equals(biayaObat.getIdObat())){
+                        return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat " +
+                                biayaObat.getIdObat()+"Already exist"), HttpStatus.CONFLICT);
+                    }
+                }
+            }
             if (biayaObat.isStatus() != true) {
                 logger.error("idObat not Avaliable");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdObat " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.CONFLICT);
@@ -71,6 +79,7 @@ public class ReportController {
                 logger.error("idObat not Avaliable");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdObat " + report.getBiayaObatList().get(i).getQty() + " Over in Qty"), HttpStatus.CONFLICT);
             }
+
         }
 
         //--------------------------------VALIDATION ID TINDAKAN ! = TRUE pada java---------------------------------------
@@ -80,6 +89,14 @@ public class ReportController {
             if (tindakan == null) {
                 logger.error("idDokter not Found in Praktek");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id Tindakan " + report.getTindakanList().get(i).getIdTindakan() + " already not Found."), HttpStatus.FOUND);
+            }
+            for (int j = 0; j < tindakanList.size(); j++){
+                if (i != j){
+                    if (tindakanList.get(j).getIdTindakan().equals(tindakan.getIdTindakan())){
+                        return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Tindakan " +
+                                tindakan.getIdTindakan()+"Already exist"), HttpStatus.CONFLICT);
+                    }
+                }
             }
             if (tindakan.isStatus() != true) {
                 logger.error("idTindakan not Avaliable");
@@ -164,20 +181,31 @@ public class ReportController {
         }
 
     }
+    //-----------------------------------UPDATE REPORT ----------------------------------------------------
 
     @RequestMapping(value = "/report/{idTransaction}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateSales(@PathVariable("idTransaction") String idTransaction, @RequestBody Report report) {
         logger.info("Updating Sales with idTransaction {}", idTransaction);
 
+  //---------------UPDATE-------VALIDATION ID OBAT !=TRUE AND QTY BUY OBAT < QTY STOCK-------------
+
         List<BiayaObat> biayaObatList = report.getBiayaObatList();
         for (int i = 0; i < biayaObatList.size(); i++) {
             BiayaObat biayaObat = biayaObatService.findByIdBiayaObatService(report.getBiayaObatList().get(i).getIdObat());
-
 
             if (biayaObat == null) {
                 logger.error("idObat is Not found");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat " + report.getBiayaObatList().get(i).getIdObat() + " No Found"), HttpStatus.NOT_FOUND);
             }
+            for (int j = 0; j < biayaObatList.size(); j++){
+                if (i != j){
+                    if (biayaObatList.get(j).getIdObat().equals(biayaObat.getIdObat())){
+                        return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Obat " +
+                                biayaObat.getIdObat()+"Already exist"), HttpStatus.CONFLICT);
+                    }
+                }
+            }
+
             if (biayaObat.isStatus() != true) {
                 logger.error("idObat not Avaliable");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdObat " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.CONFLICT);
@@ -188,7 +216,7 @@ public class ReportController {
             }
         }
 
-        //--------------------------------VALIDATION ID TINDAKAN ! = TRUE pada java---------------------------------------
+        //------------------------------UPDATE--VALIDATION ID TINDAKAN ! = TRUE pada java---------------------------------------
         List<Tindakan> tindakanList = report.getTindakanList();
         for (int i = 0; i < tindakanList.size(); i++) {
             Tindakan tindakan = tindakanService.findByIdTindakanService(report.getTindakanList().get(i).getIdTindakan());
@@ -196,13 +224,21 @@ public class ReportController {
                 logger.error("idDokter not Found in Praktek");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with Id Tindakan " + report.getTindakanList().get(i).getIdTindakan() + " already not Found."), HttpStatus.FOUND);
             }
+            for (int j = 0; j < tindakanList.size(); j++){
+                if (i != j){
+                    if (tindakanList.get(j).getIdTindakan().equals(tindakan.getIdTindakan())){
+                        return new ResponseEntity<>(new CustomErrorType("Unable to create . A report with id Tindakan " +
+                                tindakan.getIdTindakan()+"Already exist"), HttpStatus.CONFLICT);
+                    }
+                }
+            }
             if (tindakan.isStatus() != true) {
                 logger.error("idTindakan not Avaliable");
                 return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with idTindakan " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.CONFLICT);
             }
         }
 
-        // ------------------------------------------VALIDATION ID DOKTER AND STATUS---------------------------------
+        // ------------------------------------------VALIDATION UPDATE ID DOKTER AND STATUS---------------------------------
         Dokter dokter = dokterService.findByIdDokterService(report.getIdDokter());
         if (dokter == null) {
             logger.error("idDokter not Found in Praktek");
@@ -241,5 +277,33 @@ public class ReportController {
         currentReport.setIdTransaction(report.getIdTransaction());
         reportService.updateListServiceReport(report);
         return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
+    //--------------------------------Find All With Pagination---------------------
+    @RequestMapping(value = "/report/paging/", method = RequestMethod.GET)
+    public ResponseEntity<?>getrreportWithPaging(@RequestParam int page, @RequestParam int limit){
+        List<Report>reportList = reportService.findAllReportWithPaging(page,limit);
+        if(reportList.isEmpty()){
+            return new ResponseEntity<>(reportList,HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<>(reportList ,HttpStatus.OK);
+        }
+    }
+    //---------------------------------------DELETE BY ID-------------------------------------
+    @RequestMapping(value = "/report/{idTransaction}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteReportbyId(@PathVariable("idTransaction") String idTransaction) {
+        logger.info("Fetching & Deleting Report with id {}", idTransaction);
+
+        Report report = reportService.findByIdReport(idTransaction);
+        if (report == null) {
+            logger.error("Unable to delete. Pasien with id {} not found.", idTransaction);
+            return new ResponseEntity<>(new CustomErrorType("Unable to delete. Report with id " + idTransaction + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        else {
+            reportService.deleteReportServicebyId(idTransaction);
+            return new ResponseEntity<Pasien>(HttpStatus.NO_CONTENT);
+        }
     }
 }

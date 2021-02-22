@@ -7,14 +7,6 @@ public class BiayaObat {
     private int harga;
     private int totalHarga;
 
-    public int getTotalHarga() {
-        return totalHarga;
-    }
-
-    public void setTotalHarga(int totalHarga) {
-        this.totalHarga = totalHarga;
-    }
-
     private boolean status;
 
 
@@ -38,7 +30,13 @@ public class BiayaObat {
         this.harga = harga;
         this.status = status;
     }
+    public int getTotalHarga() {
+        return totalHarga;
+    }
 
+    public void setTotalHarga(int totalHarga) {
+        this.totalHarga = totalHarga;
+    }
     public String getIdObat() {
         return idObat;
     }
@@ -78,4 +76,17 @@ public class BiayaObat {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "BiayaObat{" +
+                "idObat='" + idObat + '\'' +
+                ", namaObat='" + namaObat + '\'' +
+                ", qty=" + qty +
+                ", harga=" + harga +
+                ", totalHarga=" + totalHarga +
+                ", status=" + status +
+                '}';
+    }
 }
+

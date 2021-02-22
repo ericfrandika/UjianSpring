@@ -44,4 +44,14 @@ public class Tindakan {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Tindakan{" +
+                "idTindakan='" + idTindakan + '\'' +
+                ", namaTindakan='" + namaTindakan + '\'' +
+                ", biayaTindakan=" + biayaTindakan +
+                ", status=" + status +
+                '}';
+    }
 }

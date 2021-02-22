@@ -27,7 +27,7 @@ public interface BiayaObatService {
     void updateStatusServiceBiayaObat(BiayaObat biayaObat);
 
     boolean isObatExist(BiayaObat obat);
-    boolean isObatExistId(BiayaObat obat);
+
 
 }
 
