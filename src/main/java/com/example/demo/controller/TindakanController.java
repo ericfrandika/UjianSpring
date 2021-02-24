@@ -27,6 +27,7 @@ public class TindakanController {
     //(1)----------OKE-------------------------CREAT DATA Tindakan---------------------------------
     @RequestMapping(value = "/tindakan/", method = RequestMethod.POST)
     public ResponseEntity<?> crateTindakan(@RequestBody Tindakan tindakan) {
+
         if (tindakanService.isTindakanExist(tindakan)) {
             logger.error("Unable to create. A BiayaObat with name {} already exist", tindakan.getNamaTindakan());
             return new ResponseEntity<>(new CustomErrorType("Unable to create. A Tindakan with name " + tindakan.getNamaTindakan() + " already exist."), HttpStatus.CONFLICT);
@@ -38,7 +39,7 @@ public class TindakanController {
         }
     }
 
-    //(2)--------OKE------------------------Find ALl DATA Pasien----------------------------------
+    //(2)--------OKE------------------------Find ALl DATA TIndakan----------------------------------
 
     @RequestMapping(value = "/tindakan/", method = RequestMethod.GET)
     public ResponseEntity<List<Tindakan>> listAllTindakan() {
@@ -50,7 +51,7 @@ public class TindakanController {
             return new ResponseEntity<>(tindakanList, HttpStatus.OK);
         }
     }
-    //(2)--------OKE------------------------Find ALl DATA Pasien----------------------------------
+    //(2)--------OKE------------------------Find ALl DATA Tindakan----------------------------------
 
     @RequestMapping(value = "/tindakan/true/", method = RequestMethod.GET)
     public ResponseEntity<List<Tindakan>> listAllTindakantrue() {
@@ -115,7 +116,7 @@ public class TindakanController {
     }
 
 
-    //(6)----------OKE----------------------------Update Status Pasien----------------------------------------------------
+    //(6)----------OKE----------------------------Update Status Tindakan----------------------------------------------------
     @RequestMapping(value = "/tindakan/status/{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateStatusTindakan(@PathVariable("id") String idTindakan, @RequestBody Tindakan tindakan) {
         logger.info("Updating Status Tindakan with id {}", idTindakan);
@@ -134,7 +135,7 @@ public class TindakanController {
         }
     }
 
-//--(7)----------------OKE-------------------DELETE ALL PASIEN---------------------------------------------
+//--(7)----------------OKE-------------------DELETE ALL Tindakan---------------------------------------------
 
     @RequestMapping(value = "/tindakan/", method = RequestMethod.DELETE)
     public ResponseEntity<Tindakan> deleteAllTindakan() {
@@ -143,7 +144,7 @@ public class TindakanController {
         return new ResponseEntity<Tindakan>(HttpStatus.NO_CONTENT);
     }
 
-    //--(8)----------Oke----------------------------Delete ID PASIEN-------------------------------------------
+    //--(8)----------Oke----------------------------Delete ID Tindakan-------------------------------------------
 
 
     @RequestMapping(value = "/tindakan/{id}", method = RequestMethod.DELETE)

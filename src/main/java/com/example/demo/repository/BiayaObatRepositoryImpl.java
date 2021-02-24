@@ -24,7 +24,9 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
                                 rs.getString("namaObat"),
                                 rs.getInt("qty"),
                                 rs.getInt("harga"),
+                                0,
                                 rs.getBoolean("status")
+
                         )
         );
     }
@@ -38,6 +40,7 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
                                 rs.getString("namaObat"),
                                 rs.getInt("qty"),
                                 rs.getInt("harga"),
+                                0,
                                 rs.getBoolean("status")
                         )
         );
@@ -46,11 +49,10 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
     @Override
     public void saveBiayaObatRepository(BiayaObat biayaObat) {
         UUID idObat = UUID.randomUUID();
-        jdbcTemplate.update("INSERT INTO obat(idObat, namaObat,qty,harga,status)values(?,?,?,?,?)",
+        jdbcTemplate.update("insert into obat(idObat,namaObat,qty,harga,status)values(?,?,?,?,?)",
                 idObat.toString(),
                 biayaObat.getNamaObat(),biayaObat.getQty(),
                 biayaObat.getHarga(),biayaObat.isStatus());
-
     }
 
     @Override
@@ -83,6 +85,7 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
                                 rs.getString("namaObat"),
                                 rs.getInt("qty"),
                                 rs.getInt("harga"),
+                                0,
                                 rs.getBoolean("status")
                         ));
     }
@@ -98,6 +101,7 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
                                 rs.getString("namaObat"),
                                 rs.getInt("qty"),
                                 rs.getInt("harga"),
+                                0,
                                 rs.getBoolean("status")
                         )
 
@@ -126,6 +130,7 @@ public class BiayaObatRepositoryImpl implements BiayaObatRepository {
                                 rs.getString("namaObat"),
                                 rs.getInt("qty"),
                                 rs.getInt("harga"),
+                                0,
                                 rs.getBoolean("status")
                         )
         );

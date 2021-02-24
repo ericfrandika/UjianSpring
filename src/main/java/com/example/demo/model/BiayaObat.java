@@ -6,14 +6,11 @@ public class BiayaObat {
     private int qty;
     private int harga;
     private int totalHarga;
-
     private boolean status;
 
+public BiayaObat(){
 
-    public BiayaObat(){
-
-    }
-
+}
     public BiayaObat(String idObat, String namaObat, int qty, int harga, int totalHarga, boolean status) {
         this.idObat = idObat;
         this.namaObat = namaObat;
@@ -23,13 +20,6 @@ public class BiayaObat {
         this.status = status;
     }
 
-    public BiayaObat(String idObat, String namaObat, int qty, int harga, boolean status) {
-        this.idObat = idObat;
-        this.namaObat = namaObat;
-        this.qty = qty;
-        this.harga = harga;
-        this.status = status;
-    }
     public int getTotalHarga() {
         return totalHarga;
     }

@@ -72,7 +72,13 @@ public class BiayaObatServiceImpl implements BiayaObatService {
     @Override
     public BiayaObat findByNameBiayaObatService(String namaObat) {
         BiayaObat obj;
-        return obj = biayaObatRepository.findByNameBiayaObatRepository(namaObat);
+        try {
+           obj = biayaObatRepository.findByNameBiayaObatRepository(namaObat);
+        }catch (EmptyResultDataAccessException e){
+            System.out.println(e);
+             obj = null;
+        }
+        return obj;
     }
 
     @Override

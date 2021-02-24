@@ -16,6 +16,6 @@ public interface TindakanService {
     Tindakan findByNameTindakanService(String namaTindakan);
     List<Tindakan> findAllTindakanWithPaging(int page, int limit);
     void updateStatusServiceTindakan(Tindakan tindakan);
-    public boolean isTindakanExist(Tindakan tindakan);
+    boolean isTindakanExist(Tindakan tindakan);
 
 }

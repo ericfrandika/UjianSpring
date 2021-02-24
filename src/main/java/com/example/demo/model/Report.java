@@ -24,7 +24,11 @@ public class Report {
 
 
 
-    public Report(String idTransaction, String idPasien, Pasien pasien, String idDokter, Dokter dokter, String tglTransaction, boolean status, List<BiayaObat> biayaObatList, double totalHargaObat, double ppnObat, double totalPembayaranObat, List<Tindakan> tindakanList, double totalHargaTindakan, double ppnTindakan, double totalTindakan, double totalAll) {
+    public Report(String idTransaction, String idPasien, Pasien pasien, String idDokter,
+                  Dokter dokter, String tglTransaction, boolean status,
+                  List<BiayaObat> biayaObatList, double totalHargaObat, double ppnObat,
+                  double totalPembayaranObat, List<Tindakan> tindakanList, double totalHargaTindakan,
+                  double ppnTindakan, double totalTindakan, double totalAll) {
         this.idTransaction = idTransaction;
         this.idPasien = idPasien;
         this.pasien = pasien;
@@ -41,6 +45,7 @@ public class Report {
         this.ppnTindakan = ppnTindakan;
         this.totalTindakan = totalTindakan;
         this.totalAll = totalAll;
+
     }
 
     public String getTglTransaction() {

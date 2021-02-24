@@ -7,7 +7,6 @@ public class Pasien {
     private String namaPasien ;
     private String tempat ;
     private Date tglLahir ;
-//    private String umur ;
     private String gender ;
     private String noTelp;
     private String alamat ;

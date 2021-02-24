@@ -22,7 +22,7 @@ public class BiayaObatController {
 
     ///CONTROLLER UNTUK SEMUA PASIEN
 
-    //(1)----------OKE-------------------------CREAT DATA PASIEN---------------------------------
+    //(1)----------OKE-------------------------CREAT DATA Dokter---------------------------------
     @RequestMapping(value = "/obat/", method = RequestMethod.POST)
     public ResponseEntity<?> crateObat(@RequestBody BiayaObat biayaObat) {
         if (biayaObatService.isObatExist(biayaObat)) {
@@ -32,12 +32,11 @@ public class BiayaObatController {
         else {
             logger.info("Creating Obat : {}", biayaObat);
             biayaObatService.saveBiayaObatService(biayaObat);
-            return new ResponseEntity<>(biayaObat, HttpStatus.OK);
-        }
-
+            return new ResponseEntity<>(biayaObat,HttpStatus.OK);
+   }
     }
 
-    //(2)--------OKE------------------------Find ALl DATA Pasien----------------------------------
+    //(2)--------OKE------------------------Find ALl DATA DOkter----------------------------------
 
     @RequestMapping(value = "/obat/", method = RequestMethod.GET)
     public ResponseEntity<List<BiayaObat>> listAllObat() {
@@ -49,7 +48,7 @@ public class BiayaObatController {
             return new ResponseEntity<>(biayaObatList, HttpStatus.OK);
         }
     }
-    //(2)--------OKE------------------------Find ALl DATA Pasien status True----------------------------------
+    //(2)--------OKE------------------------Find ALl DATA Dokter status True----------------------------------
 
     @RequestMapping(value = "/obat/true/", method = RequestMethod.GET)
     public ResponseEntity<List<BiayaObat>> listAllObatTrue() {
@@ -135,7 +134,7 @@ public class BiayaObatController {
         else {
             currentBiayaObat.setStatus(biayaObat.isStatus());
             biayaObatService.updateStatusServiceBiayaObat(currentBiayaObat);
-            return new ResponseEntity<>(currentBiayaObat, HttpStatus.OK);
+            return new ResponseEntity<>(currentBiayaObat.isStatus(), HttpStatus.OK);
         }
     }
 

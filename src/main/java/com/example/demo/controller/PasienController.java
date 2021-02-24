@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,8 @@ public class PasienController {
     //(1)----------OKE-------------------------CREAT DATA PASIEN---------------------------------
     @RequestMapping(value = "/pasien/", method = RequestMethod.POST)
     public ResponseEntity<?> cratePasien(@RequestBody Pasien pasien) {
-        logger.info("Creating Pasien : {}", pasien);
+
+            logger.info("Creating Pasien : {}", pasien);
             pasienService.savePasienService(pasien);
             return new ResponseEntity<>(pasien, HttpStatus.OK);
 
@@ -158,6 +160,7 @@ public ResponseEntity<?> updateStatusPasien(@PathVariable("id") String idPasien,
             return new ResponseEntity<Pasien>(HttpStatus.NO_CONTENT);
         }
     }
+
 
     //(9)--------------------------------Find All With Pagination---------------------
     @RequestMapping(value = "/pasien/paging/", method = RequestMethod.GET)

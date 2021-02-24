@@ -46,14 +46,17 @@ public class DokterRepositoryImpl implements DokterRepository {
     }
 
     @Override
-    public void saveDokterRepository(Dokter dokter) {
-        UUID idDokter = UUID.randomUUID();
-        jdbcTemplate.update("INSERT INTO dokter(idDokter, namaDokter,tglPraktek,gender,noTelp,alamat,status)values(?,?,?,?,?,?,?)",
-                idDokter.toString(),
-                dokter.getNamaDokter(),dokter.getTglPraktek(),
-                dokter.getGender(),dokter.getNoTelp(),
-                dokter.getAlamat(),
-                dokter.isStatus());
+
+        public void saveDokterRepository (Dokter dokter){
+
+            UUID idDokter = UUID.randomUUID();
+            jdbcTemplate.update("INSERT INTO dokter(idDokter, namaDokter,tglPraktek,gender,noTelp,alamat,status)values(?,?,?,?,?,?,?)",
+                    idDokter.toString(),
+                    dokter.getNamaDokter(), dokter.getTglPraktek(),
+                    dokter.getGender(), dokter.getNoTelp(),
+                    dokter.getAlamat(),
+                    dokter.isStatus());
+
     }
 
     @Override
@@ -77,19 +80,24 @@ public class DokterRepositoryImpl implements DokterRepository {
 
     @Override
     public Dokter findByIdDokterRepository(String idDokter) {
-        return jdbcTemplate.queryForObject(
-                "select * from dokter where idDokter = ?",
-                new Object[]{idDokter},
-                (rs, rowNum) ->
-                        new Dokter(
-                                rs.getString("idDokter"),
-                                rs.getString("namaDokter"),
-                                rs.getString("tglPraktek"),
-                                rs.getString("gender"),
-                                rs.getString("noTelp"),
-                                rs.getString("alamat"),
-                                rs.getBoolean("status")
-                        ));
+        try {
+            return jdbcTemplate.queryForObject(
+                    "select * from dokter where idDokter = ?",
+                    new Object[]{idDokter},
+                    (rs, rowNum) ->
+                            new Dokter(
+                                    rs.getString("idDokter"),
+                                    rs.getString("namaDokter"),
+                                    rs.getString("tglPraktek"),
+                                    rs.getString("gender"),
+                                    rs.getString("noTelp"),
+                                    rs.getString("alamat"),
+                                    rs.getBoolean("status")
+                            ));
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 
     @Override

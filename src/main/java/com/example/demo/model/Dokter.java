@@ -11,7 +11,6 @@ public class Dokter {
     private String alamat;
     private boolean status;
 
-
     public Dokter(String idDokter, String namaDokter, String tglPraktek, String gender, String noTelp, String alamat, boolean status) {
         this.idDokter = idDokter;
         this.namaDokter = namaDokter;

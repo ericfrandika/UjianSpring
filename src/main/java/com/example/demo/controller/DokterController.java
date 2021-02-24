@@ -28,8 +28,8 @@ public class DokterController {
     @RequestMapping(value = "/dokter/", method = RequestMethod.POST)
     public ResponseEntity<?> cratePasien(@RequestBody Dokter dokter) {
         logger.info("Creating Dokter : {}", dokter);
-        dokterService.saveDokterService(dokter);
-        return new ResponseEntity<>(dokter, HttpStatus.OK);
+            dokterService.saveDokterService(dokter);
+            return new ResponseEntity<>(dokter, HttpStatus.OK);
 
     }
 

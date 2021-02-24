@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -73,7 +71,7 @@ public class ReportController {
             }
             if (biayaObat.isStatus() != true) {
                 logger.error("idObat not Avaliable");
-                return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdObat " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.CONFLICT);
+                return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdObat " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.NOT_FOUND);
             }
             if (biayaObat.getQty() < report.getBiayaObatList().get(i).getQty()) {
                 logger.error("idObat not Avaliable");
@@ -100,7 +98,7 @@ public class ReportController {
             }
             if (tindakan.isStatus() != true) {
                 logger.error("idTindakan not Avaliable");
-                return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with idTindakan " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.CONFLICT);
+                return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with idTindakan " + report.getBiayaObatList().get(i).getIdObat() + " already not Avaliable."), HttpStatus.NOT_FOUND);
             }
         }
 
@@ -108,11 +106,11 @@ public class ReportController {
         Dokter dokter = dokterService.findByIdDokterService(report.getIdDokter());
         if (dokter == null) {
             logger.error("idDokter not Found in Praktek");
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdPraktek " + report.getIdDokter() + " already not Found."), HttpStatus.FOUND);
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with IdPraktek " + report.getIdDokter() + " already not Found."), HttpStatus.NOT_FOUND);
         }
         if (!(dokter.getTglPraktek().equalsIgnoreCase(report.getTglTransaction()))) {
             logger.error("TanggalTransaction not same in Praktek");
-            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with TglPraktek Dokter " + report.getTglTransaction() + " already not same."), HttpStatus.FOUND);
+            return new ResponseEntity<>(new CustomErrorType("Unable to create. A Report with TglPraktek Dokter " + report.getTglTransaction() + " already not same."), HttpStatus.NOT_FOUND);
         }
         if (dokter.isStatus() != true) {
             logger.error("idDokter not Avaliable in Praktek");
